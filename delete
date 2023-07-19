@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Set the directory path
+DIRECTORY="/home/ec2-user/scripts"
+
+# Find and delete files with .txt extension
+find "$DIRECTORY" -type f -name "*.txt" -delete
+
+echo "Files with .txt extension have been deleted."
+

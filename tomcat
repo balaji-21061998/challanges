@@ -1,0 +1,20 @@
+#!/bin/bash
+# Define the Tomcat version to install
+TOMCAT_VERSION="9.0.50"
+# Define the sample WAR application file
+WAR_APP_URL="https://www.middlewareinventory.com/blog/sample-web-application-war-file-download/"
+# Step 1: Install Java (if not already installed)
+yum update
+yum install -y default-jdk
+# Step 2: Download and install Apache Tomcat
+TOMCAT_HOME="/opt/tomcat"
+wget "https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_VERSION}/tar.gz/apache-tomcat-${TOMCAT_VERSION}.tar.gz"
+sudo mkdir -p "$TOMCAT_HOME"
+sudo tar -xf "apache-tomcat-${TOMCAT_VERSION}.tar.gz" -C "$TOMCAT_HOME" --strip-components=1
+rm "apache-tomcat-${TOMCAT_VERSION}.tar.gz"
+# Step 3: Start Tomcat
+sudo "${TOMCAT_HOME}/bin/startup.sh"
+# Step 4: Deploy the sample WAR application
+wget "$https://www.middlewareinventory.com/blog/sample-web-application-war-file-download/" -O sample.war
+sudo mv sample.war "${TOMCAT_HOME}/webapps/"
+echo "Tomcat installed and the sample application deployed successfully!"
